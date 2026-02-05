@@ -41,4 +41,155 @@ router.get('/testsql', async (request, response) => {
     }
 });
 
+router.post('/mentes', async (request, response) => { 
+    try {
+        const { adat } = request.body;
+
+        request.session.adat = adat;
+
+        response.status(200).json({
+            success: 'Sikeres mentés!',
+            adat: adat
+        });
+
+    } catch (error) {
+        response.status(500).json({
+            success: 'Sikertelen mentés!'
+        });
+    }
+});
+
+router.get('/lekeres', async (request, response) => {
+    try {
+        const adat = request.session.adat;
+        response.status(200).json({
+            success: 'Sikeres lekérés!',
+            adat: adat
+        });
+    } catch (error) {
+        response.status(500).json({
+            success: 'Sikertelen lekérés!'
+        });
+    }
+});
+
+router.post('/visit', async (request, response) => { 
+    try {
+
+        request.session.visits = request.session.visits ? request.session.visits + 1 : 1;
+        const visits = request.session.visits
+
+        response.status(200).json({
+            success: 'Sikeres mentés!',
+            visits: visits
+        })
+
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen lekérés!'
+        });
+    }
+});
+
+router.get('/visits', async (request, response) => {
+    try {
+
+        const visits = request.session.visits
+
+        response.status(200).json ({
+            success: true,
+            visits: visits
+        })
+
+    } catch(error)
+    {
+        response.status(500).json({
+            success: 'Sikertelen lekérés!'
+        });
+    }
+})
+
+router.post('/color', async (request,response) => {
+    try {
+        const {color} = request.body
+
+        request.session.color = color;
+
+        response.status(200).json({
+            success: 'Sikeres mentés!',
+            color: color
+        })
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen mentés!'
+        })
+    }
+})
+
+router.get('/color', async (request,response) => {
+    try {
+        const color = request.session.color
+        response.status(200).json({
+            success: true,
+            color: color
+        })
+
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen mentés!'
+        })
+    }
+})
+
+router.post('/kedvenc/mentes', async (request,response) => {
+    try {
+
+        const {fruit} = request.body;
+
+        request.session.fruit = fruit;
+
+        response.status(200).json({
+            success: 'Sikeres mentés',
+            adat: fruit
+        })
+
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen mentés!'
+        })
+    }
+})
+
+router.get('/kedvenc/lekeres', async (request,response) => {
+    try {
+        const fruit = request.session.fruit
+
+        response.status(200).json({
+            success: true,
+            fruit: fruit
+        })
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen mentés!'
+        })
+    }
+})
+
+router.post('/kedvenc/torles', async (request, response) => {
+    try {
+
+        request.session.fruit = ""
+
+        response.status(200).json({
+            success: 'Sikeres mentés',
+            adat: request.session.fruit
+        })
+
+    } catch(error) {
+        response.status(500).json({
+            success: 'Sikertelen törlés!'
+        })
+    }
+})
+
 module.exports = router;

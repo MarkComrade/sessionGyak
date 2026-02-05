@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("submitButton").addEventListener("click", postData);
-});
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('colorButton').addEventListener('click', postColor)
+})
 
 const postMethodFetch = async (url, data) => {
     try {
@@ -20,11 +20,13 @@ const postMethodFetch = async (url, data) => {
     }
 };
 
-const postData = async () => {
-    const inputData = document.getElementById("valueInput").value;
-    const data = { adat: inputData };
-    const response = await postMethodFetch("/api/mentes", data);
-    console.log("Válasz:", response);
 
-    window.location.href = "masodik.html";
+const postColor = async () => {
+    const colorValue = document.getElementById('colorInput').value
+    const data = {color: colorValue}
+    const response = await postMethodFetch('/api/color', data)
+    console.log(response)
+
+    const valasz = document.getElementById('valasz')
+    valasz.textContent = 'Fasz' , response;
 }

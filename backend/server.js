@@ -25,7 +25,23 @@ app.use(
 //!Routing
 //?Főoldal:
 router.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname, '../frontend/html/index.html'));
+    response.sendFile(path.join(__dirname, '../frontend/html/bekeres.html'));
+});
+
+router.get('/masodik', (request, response) => {
+    response.sendFile(path.join(__dirname, '../frontend/html/masodik.html'));
+});
+
+router.get('/harmadik', (request, response) => {
+    response.sendFile(path.join(__dirname, '../frontend/html/harmadik.html'));
+});
+
+router.get('/stats', (request, response) => {
+    response.sendFile(path.join(__dirname, '../frontend/html/stats.html'));
+});
+
+router.get('/display', (request, response) => {
+    response.sendFile(path.join(__dirname, '../frontend/html/display.html'));
 });
 
 //!API endpoints
